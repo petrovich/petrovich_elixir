@@ -40,7 +40,12 @@ defmodule PetrovichElixir.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    [{:ex_doc, ">= 0.0.0", only: :dev}]
+    [{:poison, "~> 3.1"},
+
+     # Dev and test dependencies:
+     {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
+     {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
+     {:ex_doc, ">= 0.0.0", only: :dev}]
   end
 
   defp description do
