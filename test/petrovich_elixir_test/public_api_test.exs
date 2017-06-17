@@ -1,5 +1,7 @@
-defmodule PetrovichTest.PublicAPITest do
+defmodule PetrovichElixirTest.PublicAPITest do
   use ExUnit.Case
+
+  alias PetrovichElixir.Petrovich
 
   test "public firstname function works" do
     assert Petrovich.firstname(

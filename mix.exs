@@ -1,4 +1,4 @@
-defmodule Petrovich.Mixfile do
+defmodule PetrovichElixir.Mixfile do
   use Mix.Project
 
   @version "0.0.1"

@@ -1,7 +1,7 @@
-defmodule PetrovichTest.ParserTest.MiddleName.Normal do
+defmodule PetrovichElixirTest.ParserTest.MiddleName.Normal do
   use ExUnit.Case
 
-  alias Petrovich.Parser
+  alias PetrovichElixir.Parser
 
   setup do
     values = %{
