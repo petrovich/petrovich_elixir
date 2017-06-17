@@ -12,8 +12,6 @@ otp_release:
 env: MIX_ENV=test
 
 script:
-  - mix compile
-  - ls _build/test/lib/petrovich_elixir/ebin
   - mix coveralls.travis
   - mix credo --strict
 
