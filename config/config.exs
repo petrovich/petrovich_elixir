@@ -30,3 +30,4 @@ use Mix.Config
 #     import_config "#{Mix.env}.exs"
 
 if Mix.env == :test, do: import_config "test.exs"
+if Mix.env == :dev, do: import_config "dev.exs"

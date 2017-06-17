@@ -1,7 +1,7 @@
-defmodule PetrovichElixirTest.ParserTest.FirstName.Normal do
+defmodule PetrovichTest.ParserTest.FirstName.Normal do
   use ExUnit.Case
 
-  alias PetrovichElixir.Parser
+  alias Petrovich.Parser
 
   setup do
     values = %{
@@ -76,10 +76,10 @@ defmodule PetrovichElixirTest.ParserTest.FirstName.Normal do
 end
 
 
-defmodule PetrovichElixirTest.ParserTest.FirstName.Exception do
+defmodule PetrovichTest.ParserTest.FirstName.Exception do
   use ExUnit.Case
 
-  alias PetrovichElixir.Parser
+  alias Petrovich.Parser
 
   setup do
     values = %{
@@ -128,7 +128,7 @@ defmodule PetrovichElixirTest.ParserTest.FirstName.Exception do
     end
   end
 
-    test "parses dative name", %{values: values} do
+  test "parses dative name", %{values: values} do
     for {gender, name, result} <- values.dative do
       assert Parser.parse(name, :firstname, :dative, gender) == result
     end

@@ -2,7 +2,7 @@ defmodule PetrovichElixir.Mixfile do
   use Mix.Project
 
   @version "0.0.1"
-  @url "https://github.com/sobolevn/ecto_autoslug_field"
+  @url "https://github.com/petrovich/petrovich_elixir"
 
   def project do
     [app: :petrovich_elixir,
@@ -19,31 +19,29 @@ defmodule PetrovichElixir.Mixfile do
      description: description(),
      package: package(),
      source_url: @url,
-     homepage_url: @url]
+     homepage_url: @url,
+
+     # Test coverage:
+     test_coverage: [tool: ExCoveralls],
+     preferred_cli_env: [
+       "coveralls": :test,
+       "coveralls.detail": :test,
+       "coveralls.post": :test,
+       "coveralls.html": :test,
+     ]]
   end
 
-  # Configuration for the OTP application
-  #
-  # Type "mix help compile.app" for more information
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
     [extra_applications: [:logger]]
   end
 
-  # Dependencies can be Hex packages:
-  #
-  #   {:my_dep, "~> 0.3.0"}
-  #
-  # Or git/path repositories:
-  #
-  #   {:my_dep, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
-  #
-  # Type "mix help deps" for more examples and options
   defp deps do
     [{:poison, "~> 3.1"},
 
      # Dev and test dependencies:
      {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
+     {:excoveralls, "~> 0.7", only: :test, runtime: false},
      {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
      {:ex_doc, ">= 0.0.0", only: :dev}]
   end
