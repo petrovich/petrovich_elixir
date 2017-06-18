@@ -1,4 +1,4 @@
-defmodule PetrovichElixir.Detector do
+defmodule Petrovich.Detector do
   @moduledoc """
   Guesses the gender by person's name.
   """

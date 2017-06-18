@@ -1,4 +1,4 @@
-defmodule PetrovichElixir.Config do
+defmodule Petrovich.Config do
   @moduledoc """
   Provides application/system environment variable lookup at runtime
   """

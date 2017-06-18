@@ -1,4 +1,4 @@
-defmodule PetrovichElixir.Applier do
+defmodule Petrovich.Applier do
   @moduledoc """
   Applies rules on value.
 

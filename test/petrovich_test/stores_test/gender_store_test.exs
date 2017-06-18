@@ -1,7 +1,7 @@
-defmodule PetrovichElixirTest.GenderStoreTest do
+defmodule PetrovichTest.GenderStoreTest do
   use ExUnit.Case
 
-  alias PetrovichElixir.GenderStore
+  alias Petrovich.GenderStore
 
   setup do
     {status, _pid} = GenderStore.start_link()

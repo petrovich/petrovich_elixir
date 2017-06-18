@@ -29,8 +29,6 @@ You need to understand how [grammatical cases](https://en.wikipedia.org/wiki/Gra
 ### API
 
 ```elixir
-alias PetrovichElixir.Petrovich
-
 Petrovich.firstname("Александр", :accusative, :male)
 # => Александра
 

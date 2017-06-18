@@ -1,7 +1,7 @@
-defmodule PetrovichElixirTest.ParserTest.MiddleName.Normal do
+defmodule PetrovichTest.ParserTest.MiddleName.Normal do
   use ExUnit.Case
 
-  alias PetrovichElixir.Parser
+  alias Petrovich.Parser
 
   setup do
     values = %{
@@ -40,37 +40,37 @@ defmodule PetrovichElixirTest.ParserTest.MiddleName.Normal do
 
   test "parses nomenative name", %{values: values} do
     for {gender, name, result} <- values.nomenative do
-      assert Parser.parse(name, :middlename, :nomenative, gender) == result
+      assert Parser.parse!(name, :middlename, :nomenative, gender) == result
     end
   end
 
   test "parses genitive name", %{values: values} do
     for {gender, name, result} <- values.genitive do
-      assert Parser.parse(name, :middlename, :genitive, gender) == result
+      assert Parser.parse!(name, :middlename, :genitive, gender) == result
     end
   end
 
   test "parses dative name", %{values: values} do
     for {gender, name, result} <- values.dative do
-      assert Parser.parse(name, :middlename, :dative, gender) == result
+      assert Parser.parse!(name, :middlename, :dative, gender) == result
     end
   end
 
   test "parses accusative name", %{values: values} do
     for {gender, name, result} <- values.accusative do
-      assert Parser.parse(name, :middlename, :accusative, gender) == result
+      assert Parser.parse!(name, :middlename, :accusative, gender) == result
     end
   end
 
   test "parses instrumental name", %{values: values} do
     for {gender, name, result} <- values.instrumental do
-      assert Parser.parse(name, :middlename, :instrumental, gender) == result
+      assert Parser.parse!(name, :middlename, :instrumental, gender) == result
     end
   end
 
   test "parses prepositional name", %{values: values} do
     for {gender, name, result} <- values.prepositional do
-      assert Parser.parse(name, :middlename, :prepositional, gender) == result
+      assert Parser.parse!(name, :middlename, :prepositional, gender) == result
     end
   end
 end

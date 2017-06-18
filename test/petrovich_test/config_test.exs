@@ -1,7 +1,7 @@
-defmodule PetrovichElixirTest.ConfigTest do
+defmodule PetrovichTest.ConfigTest do
   use ExUnit.Case
 
-  alias PetrovichElixir.Config
+  alias Petrovich.Config
 
   test "config can read regular config values" do
     Application.put_env(:petrovich_elixir, :test_var, "test")

@@ -1,4 +1,4 @@
-defmodule PetrovichElixir.Store do
+defmodule Petrovich.Store do
   @moduledoc """
   This module implements basic functionality for different agents.
 
@@ -7,7 +7,8 @@ defmodule PetrovichElixir.Store do
   caller module.
   """
 
-  alias PetrovichElixir.Config
+  alias Petrovich.Config
+  alias Petrovich.Exceptions.RulesFileException
 
   defmacro __using__(options) do
     caller = __CALLER__.module
@@ -37,10 +38,15 @@ defmodule PetrovichElixir.Store do
       end
 
       defp load_values do
-        :petrovich_elixir
-        |> Config.get_env(@setting)
-        |> File.read!
-        |> Poison.decode!
+        try do
+          :petrovich_elixir
+          |> Config.get_env(@setting)
+          |> File.read!
+          |> Poison.decode!
+        rescue
+          e in File.Error ->
+            raise RulesFileException, message: Exception.message(e)
+        end
       end
     end
   end

@@ -1,4 +1,4 @@
-defmodule PetrovichElixir.GenderStore do
+defmodule Petrovich.GenderStore do
   @moduledoc """
   This module stores different genders.
 
@@ -6,7 +6,7 @@ defmodule PetrovichElixir.GenderStore do
   last name or middle name.
   """
 
-  use PetrovichElixir.Store, setting: :gender_path
+  use Petrovich.Store, setting: :gender_path
 
   @name __MODULE__
 

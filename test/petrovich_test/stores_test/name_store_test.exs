@@ -1,7 +1,7 @@
-defmodule PetrovichElixirTest.NameStoreTest do
+defmodule PetrovichTest.NameStoreTest do
   use ExUnit.Case
 
-  alias PetrovichElixir.NameStore
+  alias Petrovich.NameStore
 
   setup do
     {status, _pid} = NameStore.start_link()
