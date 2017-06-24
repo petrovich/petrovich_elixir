@@ -38,15 +38,13 @@ defmodule Petrovich.Store do
       end
 
       defp load_values do
-        try do
-          :petrovich_elixir
-          |> Config.get_env(@setting)
-          |> File.read!
-          |> Poison.decode!
-        rescue
-          e in File.Error ->
-            raise RulesFileException, message: Exception.message(e)
-        end
+        :petrovich_elixir
+        |> Config.get_env(@setting)
+        |> File.read!
+        |> Poison.decode!
+      rescue
+        e in File.Error ->
+          raise RulesFileException, message: Exception.message(e)
       end
     end
   end
