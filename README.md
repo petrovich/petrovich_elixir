@@ -14,7 +14,7 @@ by adding `petrovich_elixir` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
-  [{:petrovich_elixir, "~> 0.1.0"}]
+  [{:petrovich_elixir, "~> 0.1"}]
 end
 ```
 
