@@ -1,8 +1,16 @@
 defmodule Petrovich.Utils.ResultJoiner do
   @moduledoc false
 
-  def join_result(results, callback) do
-    success = Enum.any?(results, &compare_status/1)
+  def join_all_results(results, callback) do
+    do_join(results, callback, &Enum.all?/2)
+  end
+
+  def join_any_results(results, callback) do
+    do_join(results, callback, &Enum.any?/2)
+  end
+
+  defp do_join(results, callback, check) do
+    success = check.(results, &compare_status/1)
 
     if success do
       {:ok, callback.(results)}

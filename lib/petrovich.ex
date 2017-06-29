@@ -4,17 +4,21 @@ defmodule Petrovich do
 
   Public interface to all the functions.
   It can inflect first, middle, and last names.
-  It also can detect gender by name.
 
   ## List of cases
 
   Here's a quick reminder:
 
   > nomenative: именительный
+  >
   > genitive: родительный
+  >
   > dative: дательный
+  >
   > accusative: винительный
+  >
   > instrumental: творительный
+  >
   > prepositional: предложный
   """
 

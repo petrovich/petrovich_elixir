@@ -42,7 +42,7 @@ defmodule Petrovich.Detector do
     |> String.downcase
     |> String.split("-")
     |> Enum.map(fn(item) -> prepare_value(item, exceptions, suffixes) end)
-    |> ResultJoiner.join_result(&join_result/1)
+    |> ResultJoiner.join_any_results(&join_result/1)
   end
 
   defp prepare_value(name, exceptions, suffixes) do

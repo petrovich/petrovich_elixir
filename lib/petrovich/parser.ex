@@ -73,7 +73,7 @@ defmodule Petrovich.Parser do
     |> Enum.map(fn(item) ->
       prepare_value(item, case_, gender, exceptions, suffixes)
     end)
-    |> ResultJoiner.join_result(&join_callback/1)
+    |> ResultJoiner.join_all_results(&join_callback/1)
   end
 
   defp prepare_value(value, case_, gender, exceptions, suffixes) do

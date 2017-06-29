@@ -1,5 +1,17 @@
 # Changelog
 
+
+## Version 0.1.2
+
+### Bugfixes
+
+- Fixes bug when some names like "Никита-123" was considered valid
+
+### Documentation
+
+- Fixes formating of cases' names
+
+
 ## Version 0.1.1
 
 ### Bugfixes
@@ -12,6 +24,7 @@
 - Adds little fixes to the existing docs
 - Adds `CHANGELOG.md`
 - Adds `CONTRIBUTING.md`
+
 
 ## Version 0.1.0
 
