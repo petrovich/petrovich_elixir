@@ -1,7 +1,7 @@
 defmodule Petrovich.Mixfile do
   use Mix.Project
 
-  @version "0.1.0"
+  @version "0.1.1"
   @url "https://github.com/petrovich/petrovich_elixir"
 
   def project do

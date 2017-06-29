@@ -1,6 +1,8 @@
 defmodule PetrovichTest.PublicAPITest do
   use ExUnit.Case
 
+  doctest Petrovich
+
   test "public firstname function works" do
     assert Petrovich.firstname(
       "Александр", :accusative, :male) == {:ok, "Александра"}

@@ -4,6 +4,7 @@ defmodule Petrovich.Detector do
   """
 
   alias Petrovich.GenderStore
+  alias Petrovich.Utils.ResultJoiner
 
   @doc """
   Detects a gender by name.
@@ -13,31 +14,52 @@ defmodule Petrovich.Detector do
     1. `name` raw person's name in nomenative case
     2. `type` which shows what part of person's name it is
 
+  You can use any of these values as `type`:
+
+      [:firstname, :middlename, :lastname]
+
   On success it returns a tuple `{:ok, "detected_gender"}`.
   Or `:error` in cases when it is impossible to detect gender.
 
   ## Examples
 
-    iex> Detector.detect_gender("Игорь", :firstname)
-    {:ok, "male"}
+      iex> Detector.detect_gender("Игорь", :firstname)
+      {:ok, "male"}
 
-    iex> Detector.detect_gender("Саша", :firstname)
-    {:ok, "androgynous"}
+      iex> Detector.detect_gender("Саша", :firstname)
+      {:ok, "androgynous"}
 
-    iex> Detector.detect_gender("123", :firstname)
-    :error
+      iex> Detector.detect_gender("123", :firstname)
+      :error
+
   """
   @spec detect_gender(String.t, atom()) :: {:ok, String.t} | :error
   def detect_gender(name, type) do
-    # GenderStore.start_link()
-
     %{"exceptions" => exceptions,
       "suffixes" => suffixes} = GenderStore.get("gender", to_string(type))
 
     name
     |> String.downcase
+    |> String.split("-")
+    |> Enum.map(fn(item) -> prepare_value(item, exceptions, suffixes) end)
+    |> ResultJoiner.join_result(&join_result/1)
+  end
+
+  defp prepare_value(name, exceptions, suffixes) do
+    name
     |> maybe_exception(exceptions)
     |> maybe_rule(suffixes)
+  end
+
+  defp join_result(result) do
+    result
+    |> Enum.find(fn (item) ->
+      case item do
+        {:ok, _} -> true
+        _ -> false
+      end
+    end)
+    |> elem(1)
   end
 
   defp maybe_exception(name, exceptions) do

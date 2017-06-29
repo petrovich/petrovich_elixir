@@ -9,6 +9,7 @@ defmodule Petrovich.Parser do
   """
 
   alias Petrovich.{NameStore, Applier, Detector}
+  alias Petrovich.Utils.ResultJoiner
   alias Petrovich.Exceptions.ParseException
 
   @doc """
@@ -18,11 +19,12 @@ defmodule Petrovich.Parser do
 
   ## Examples
 
-    iex> Parser.parse("Николай", :firstname, :dative, :male)
-    {:ok, "Николаю"}
+      iex> Parser.parse("Николай", :firstname, :dative, :male)
+      {:ok, "Николаю"}
 
-    iex> Parser.parse("Пирогов", :lastname, :instrumental, :male)
-    {:ok, "Пироговым"}
+      iex> Parser.parse("Пирогов", :lastname, :instrumental, :male)
+      {:ok, "Пироговым"}
+
   """
   @spec parse(String.t, atom(),
     atom(), atom() | nil) :: {:ok, String.t} | :error
@@ -37,13 +39,14 @@ defmodule Petrovich.Parser do
 
   ## Examples
 
-    iex> Parser.parse!("Николай", :firstname, :dative, :male)
-    "Николаю"
+      iex> Parser.parse!("Николай", :firstname, :dative, :male)
+      "Николаю"
 
-    iex> Parser.parse!("Пирогов", :lastname, :instrumental, :male)
-    "Пироговым"
+      iex> Parser.parse!("Пирогов", :lastname, :instrumental, :male)
+      "Пироговым"
+
   """
-  @spec parse!(String.t, atom(), atom(), atom() | none) :: String.t
+  @spec parse!(String.t, atom(), atom(), atom() | nil) :: String.t
   def parse!(data, type, case_, gender) do
     case parse(data, type, case_, gender) do
       {:ok, value} -> value
@@ -62,39 +65,32 @@ defmodule Petrovich.Parser do
   end
 
   defp apply_rule(values, type, case_, gender) do
-    # NameStore.start_link()
-
-    values
-    |> String.split("-")
-    |> Enum.map(fn(item) -> prepare_value(item, type, case_, gender) end)
-    |> join_result
-  end
-
-  defp prepare_value(value, type, case_, gender) do
     %{"exceptions" => exceptions,
       "suffixes" => suffixes} = NameStore.get(type)
 
+    values
+    |> String.split("-")
+    |> Enum.map(fn(item) ->
+      prepare_value(item, case_, gender, exceptions, suffixes)
+    end)
+    |> ResultJoiner.join_result(&join_callback/1)
+  end
+
+  defp prepare_value(value, case_, gender, exceptions, suffixes) do
     value
     |> String.downcase
     |> maybe_exception(gender, exceptions)
     |> maybe_rule(gender, suffixes)
     |> case do
-      {:error, _} -> {:error, value}
+      {:error, _} -> :error
       {:ok, res}  -> {:ok, Applier.apply(value, case_, res)}
     end
   end
 
-  defp join_result(results) do
-    success = Enum.all?(results, fn({status, _}) -> status == :ok end)
-    joined = results
-      |> Enum.map(fn({_, item}) -> item end)
-      |> Enum.join("-")
-
-    if success do
-      {:ok, joined}
-    else
-      :error
-    end
+  defp join_callback(results) do
+    results
+    |> Enum.map(fn({_, item}) -> item end)
+    |> Enum.join("-")
   end
 
   defp maybe_exception(name, gender, exceptions) do
