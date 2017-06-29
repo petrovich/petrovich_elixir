@@ -1,7 +1,7 @@
 defmodule Petrovich.Mixfile do
   use Mix.Project
 
-  @version "0.0.1"
+  @version "0.1.0"
   @url "https://github.com/petrovich/petrovich_elixir"
 
   def project do
@@ -33,7 +33,7 @@ defmodule Petrovich.Mixfile do
 
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
-    [extra_applications: [:logger]]
+    [mod: {Petrovich, []}, extra_applications: [:logger]]
   end
 
   defp deps do
@@ -58,6 +58,7 @@ defmodule Petrovich.Mixfile do
     [maintainers: ["Nikita Sobolev"],
      licenses: ["MIT"],
      links: %{"GitHub" => @url},
-     files: ~w(mix.exs README.md lib)]
+     files: ~w(mix.exs README.md lib config rules/*.json)
+    ]
   end
 end

@@ -3,6 +3,8 @@ defmodule PetrovichTest.ParserTest.FirstName.Normal do
 
   alias Petrovich.Parser
 
+  doctest Parser  # only in this module
+
   setup do
     values = %{
       nomenative: [

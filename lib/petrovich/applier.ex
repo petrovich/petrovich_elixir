@@ -4,6 +4,8 @@ defmodule Petrovich.Applier do
 
   This module applies inflection rules on raw values.
   It is tightly coupled with `Parser`, which supplies the rules.
+
+  This function should not be used directly. Use `Petrovich` module instead.
   """
 
   @rules %{
@@ -14,6 +16,13 @@ defmodule Petrovich.Applier do
     prepositional: 4,
   }
 
+  @doc """
+  This function applies one of the rule based on case to the name,
+  making the inflection itself.
+
+  These rules should be in format: `%{"mods" => list(5)}`.
+  """
+  @spec apply(String.t, atom(), map()) :: {atom(), String.t}
   def apply(data, case_, %{"mods" => mods}) do
     mod = Enum.at(mods, @rules[case_])
     apply_mod(mod, data)

@@ -4,28 +4,65 @@ defmodule Petrovich.Parser do
 
   Then it parses the rules to find the appropriate modifications.
   It then calls `Applier` to modify the value.
+
+  This module should not be used directly. Use `Petrovich` module instead.
   """
 
-  alias Petrovich.{NameStore, Applier}
+  alias Petrovich.{NameStore, Applier, Detector}
   alias Petrovich.Exceptions.ParseException
 
+  @doc """
+  Parses name and gets modifiers for the given case.
+
+  Then it passes the name and modification rules to the `Applier`.
+
+  ## Examples
+
+    iex> Parser.parse("Николай", :firstname, :dative, :male)
+    {:ok, "Николаю"}
+
+    iex> Parser.parse("Пирогов", :lastname, :instrumental, :male)
+    {:ok, "Пироговым"}
+  """
+  @spec parse(String.t, atom(),
+    atom(), atom() | nil) :: {:ok, String.t} | :error
   def parse(data, _, :nomenative, _), do: {:ok, data}
   def parse(data, type, case_, gender) do
+    gender = maybe_detect_gender(gender, data, type)
     apply_rule(data, to_string(type), case_, to_string(gender))
   end
 
-  def parse!(data, type, case_, gender) do
-    {status, data} = parse(data, type, case_, gender)
+  @doc """
+  Pretty much the same as `parse/4`, but raises exception instead.
 
-    if status == :ok do
-      data
+  ## Examples
+
+    iex> Parser.parse!("Николай", :firstname, :dative, :male)
+    "Николаю"
+
+    iex> Parser.parse!("Пирогов", :lastname, :instrumental, :male)
+    "Пироговым"
+  """
+  @spec parse!(String.t, atom(), atom(), atom() | none) :: String.t
+  def parse!(data, type, case_, gender) do
+    case parse(data, type, case_, gender) do
+      {:ok, value} -> value
+      :error -> raise ParseException
+    end
+  end
+
+  defp maybe_detect_gender(gender, data, type) do
+    with nil <- gender,
+      {:ok, parsed_gender} <- Detector.detect_gender(data, type) do
+        parsed_gender
     else
-      raise ParseException
+      :error -> :androgynous
+      _ -> gender
     end
   end
 
   defp apply_rule(values, type, case_, gender) do
-    NameStore.start_link()
+    # NameStore.start_link()
 
     values
     |> String.split("-")
@@ -56,7 +93,7 @@ defmodule Petrovich.Parser do
     if success do
       {:ok, joined}
     else
-      {:error, joined}
+      :error
     end
   end
 

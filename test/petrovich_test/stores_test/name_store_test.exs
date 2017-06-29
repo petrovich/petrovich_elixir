@@ -3,12 +3,6 @@ defmodule PetrovichTest.NameStoreTest do
 
   alias Petrovich.NameStore
 
-  setup do
-    {status, _pid} = NameStore.start_link()
-
-    status
-  end
-
   test "agent has all end values" do
     values = NameStore.all()
     assert map_size(values) == 3

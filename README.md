@@ -21,22 +21,31 @@ end
 
 ## Usage
 
-### Do I need to know russian to use it?
+### Do I need to know Russian to use it?
 
-Yes, you will need some basic russian knowledge to work with this library.
-You need to understand how [grammatical cases](https://en.wikipedia.org/wiki/Grammatical_case) work in russian language.
+Yes, you will need some basic Russian knowledge to work with this library.
+You need to understand how [grammatical cases](https://en.wikipedia.org/wiki/Grammatical_case) work in Russian language.
 
-### API
+### Inflection
 
 ```elixir
-Petrovich.firstname("Александр", :accusative, :male)
+Petrovich.firstname!("Александр", :accusative)
 # => Александра
 
-Petrovich.middlename("Сергеевич", :accusative, :male)
+Petrovich.middlename!("Сергеевич", :accusative)
 # => Сергеевича
 
-Petrovich.lastname("Пушкин", :accusative, :male)
+Petrovich.lastname!("Пушкин", :accusative, :male)
 # => Пушкина
+```
+
+### Gender detection
+
+```elixir
+alias Petrovich.Detector
+
+Detector.detect_gender("Александр", :firstname)
+# => {:ok, "male"}
 ```
 
 

@@ -6,15 +6,35 @@ defmodule Petrovich.Detector do
   alias Petrovich.GenderStore
 
   @doc """
-  Returns gender from person's name
+  Detects a gender by name.
+
+  This function receives two arguments:
+
+    1. `name` raw person's name in nomenative case
+    2. `type` which shows what part of person's name it is
+
+  On success it returns a tuple `{:ok, "detected_gender"}`.
+  Or `:error` in cases when it is impossible to detect gender.
+
+  ## Examples
+
+    iex> Detector.detect_gender("Игорь", :firstname)
+    {:ok, "male"}
+
+    iex> Detector.detect_gender("Саша", :firstname)
+    {:ok, "androgynous"}
+
+    iex> Detector.detect_gender("123", :firstname)
+    :error
   """
-  def detect_gender(value, type) do
-    GenderStore.start_link()
+  @spec detect_gender(String.t, atom()) :: {:ok, String.t} | :error
+  def detect_gender(name, type) do
+    # GenderStore.start_link()
 
     %{"exceptions" => exceptions,
       "suffixes" => suffixes} = GenderStore.get("gender", to_string(type))
 
-    value
+    name
     |> String.downcase
     |> maybe_exception(exceptions)
     |> maybe_rule(suffixes)
@@ -35,7 +55,7 @@ defmodule Petrovich.Detector do
     |> Enum.find(fn({_, rule}) -> fits?(name, rule) end)
     |> case do
       {gender, _} -> {:ok, gender}
-      nil -> {:error, name}
+      nil -> :error
     end
   end
 

@@ -4,9 +4,8 @@ defmodule Petrovich.Config do
   """
 
   @doc """
-  Returns the requested variable
+  Returns the requested variable from application's environment.
   """
-
   @spec get_env(atom, atom, atom | map) :: term
   def get_env(application, key, default \\ nil) do
     application

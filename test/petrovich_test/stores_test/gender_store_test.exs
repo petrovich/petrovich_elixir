@@ -3,12 +3,6 @@ defmodule PetrovichTest.GenderStoreTest do
 
   alias Petrovich.GenderStore
 
-  setup do
-    {status, _pid} = GenderStore.start_link()
-
-    status
-  end
-
   test "agent has all end values" do
     values = GenderStore.all()
     assert map_size(values) == 1
