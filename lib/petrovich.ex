@@ -29,11 +29,10 @@ defmodule Petrovich do
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
-    children =
-      [
-        worker(Petrovich.NameStore, []),
-        worker(Petrovich.GenderStore, []),
-      ]
+    children = [
+      worker(Petrovich.NameStore, []),
+      worker(Petrovich.GenderStore, [])
+    ]
 
     opts = [strategy: :one_for_one, name: Petrovich.Supervisor]
     Supervisor.start_link(children, opts)
@@ -59,7 +58,8 @@ defmodule Petrovich do
       {:ok, "Кире"}
 
   """
-  @spec firstname(String.t, atom(), atom() | none()) :: {atom(), String.t}
+  @spec firstname(String.t(), atom(), atom() | none()) ::
+          {:ok, String.t()} | :error
   def firstname(name, case_, gender \\ @default_gender) do
     Parser.parse(name, :firstname, case_, gender)
   end
@@ -67,7 +67,7 @@ defmodule Petrovich do
   @doc """
   The same as `firstname/3`, but raises `ParseException` on errors.
   """
-  @spec firstname!(String.t, atom(), atom() | none()) :: String.t
+  @spec firstname!(String.t(), atom(), atom() | none()) :: String.t()
   def firstname!(name, case_, gender \\ @default_gender) do
     Parser.parse!(name, :firstname, case_, gender)
   end
@@ -90,7 +90,8 @@ defmodule Petrovich do
       {:ok, "Викторовне"}
 
   """
-  @spec middlename(String.t, atom(), atom() | none()) :: {atom(), String.t}
+  @spec middlename(String.t(), atom(), atom() | none()) ::
+          {:ok, String.t()} | :error
   def middlename(name, case_, gender \\ @default_gender) do
     Parser.parse(name, :middlename, case_, gender)
   end
@@ -98,7 +99,7 @@ defmodule Petrovich do
   @doc """
   The same as `middlename/3`, but raises `ParseException` on errors.
   """
-  @spec middlename!(String.t, atom(), atom() | none()) :: String.t
+  @spec middlename!(String.t(), atom(), atom() | none()) :: String.t()
   def middlename!(name, case_, gender \\ @default_gender) do
     Parser.parse!(name, :middlename, case_, gender)
   end
@@ -121,7 +122,8 @@ defmodule Petrovich do
       {:ok, "Гореве"}
 
   """
-  @spec lastname(String.t, atom(), atom() | none()) :: {atom(), String.t}
+  @spec lastname(String.t(), atom(), atom() | none()) ::
+          {:ok, String.t()} | :error
   def lastname(name, case_, gender \\ @default_gender) do
     Parser.parse(name, :lastname, case_, gender)
   end
@@ -129,7 +131,7 @@ defmodule Petrovich do
   @doc """
   The same as `lastname/3`, but raises `ParseException` on errors.
   """
-  @spec lastname!(String.t, atom(), atom() | none()) :: String.t
+  @spec lastname!(String.t(), atom(), atom() | none()) :: String.t()
   def lastname!(name, case_, gender \\ @default_gender) do
     Parser.parse!(name, :lastname, case_, gender)
   end
