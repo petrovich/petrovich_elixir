@@ -20,6 +20,7 @@ defmodule Petrovich do
   > instrumental: творительный
   >
   > prepositional: предложный
+
   """
 
   use Application

@@ -38,12 +38,15 @@ defmodule Petrovich.Mixfile do
 
   defp deps do
     [
-      {:poison, "~> 3.1"},
+      {:jason, "~> 1.1"},
+
+      # We used to have it as a primary json lib, now only use for tests:
+      {:poison, "~> 4.0", only: [:dev, :test]},
 
       # Dev and test dependencies:
-      {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
-      {:excoveralls, "~> 0.7", only: :test, runtime: false},
-      {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
+      {:credo, "~> 1.1", only: [:dev, :test], runtime: false},
+      {:excoveralls, "~> 0.11", only: :test, runtime: false},
+      {:dialyxir, "~> 0.5", only: :dev, runtime: false},
       {:ex_doc, ">= 0.0.0", only: :dev}
     ]
   end

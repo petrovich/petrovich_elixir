@@ -5,9 +5,11 @@
 ### Breaking changes
 
 - Now only support `elixir>=1.6`
+- We now use `Jason` as the default `json` library
 
 ### Features
 
+- You can configure `:json_module` to set `Poison`
 - Updates dependencies
 
 ### Misc

@@ -8,9 +8,9 @@ defmodule Petrovich.Parser do
   This module should not be used directly. Use `Petrovich` module instead.
   """
 
-  alias Petrovich.{NameStore, Applier, Detector}
-  alias Petrovich.Utils.ResultJoiner
+  alias Petrovich.{Applier, Detector, NameStore}
   alias Petrovich.Exceptions.ParseException
+  alias Petrovich.Utils.ResultJoiner
 
   @doc """
   Parses name and gets modifiers for the given case.

@@ -9,12 +9,11 @@ Elixir library to inflect Russian first, last, and middle names.
 
 ## Installation
 
-The package can be installed
-by adding `petrovich_elixir` to your list of dependencies in `mix.exs`:
-
 ```elixir
 def deps do
-  [{:petrovich_elixir, "~> 0.1"}]
+  [
+    {:petrovich_elixir, "~> 1.0"}
+  ]
 end
 ```
 
