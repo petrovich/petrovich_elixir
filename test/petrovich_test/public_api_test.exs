@@ -4,32 +4,30 @@ defmodule PetrovichTest.PublicAPITest do
   doctest Petrovich
 
   test "public firstname function works" do
-    assert Petrovich.firstname(
-      "Александр", :accusative, :male) == {:ok, "Александра"}
+    assert Petrovich.firstname("Александр", :accusative, :male) ==
+             {:ok, "Александра"}
   end
 
   test "public middlename function works" do
-    assert Petrovich.middlename(
-      "Сергеевич", :accusative, :male) == {:ok, "Сергеевича"}
+    assert Petrovich.middlename("Сергеевич", :accusative, :male) ==
+             {:ok, "Сергеевича"}
   end
 
   test "public lastname function works" do
-    assert Petrovich.lastname(
-      "Пушкин", :accusative, :male) == {:ok, "Пушкина"}
+    assert Petrovich.lastname("Пушкин", :accusative, :male) == {:ok, "Пушкина"}
   end
 
   test "public firstname! function works" do
-    assert Petrovich.firstname!(
-      "Александр", :accusative, :male) == "Александра"
+    assert Petrovich.firstname!("Александр", :accusative, :male) ==
+             "Александра"
   end
 
   test "public middlename! function works" do
-    assert Petrovich.middlename!(
-      "Сергеевич", :accusative, :male) == "Сергеевича"
+    assert Petrovich.middlename!("Сергеевич", :accusative, :male) ==
+             "Сергеевича"
   end
 
   test "public lastname! function works" do
-    assert Petrovich.lastname!(
-      "Пушкин", :accusative, :male) == "Пушкина"
+    assert Petrovich.lastname!("Пушкин", :accusative, :male) == "Пушкина"
   end
 end

@@ -1,5 +1,20 @@
 # Changelog
 
+## Version 1.0.0
+
+### Breaking changes
+
+- Now only support `elixir>=1.6`
+
+### Features
+
+- Updates dependencies
+
+### Misc
+
+- Adds `dependabot`
+- Adds `mix format`
+
 
 ## Version 0.1.2
 

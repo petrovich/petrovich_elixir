@@ -11,7 +11,7 @@ defmodule Petrovich.GenderStore do
   @name __MODULE__
 
   def get(key1, key2) do
-    Agent.get(@name, fn(state) ->
+    Agent.get(@name, fn state ->
       state
       |> Map.get(key1)
       |> Map.get(key2)

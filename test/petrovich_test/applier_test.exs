@@ -5,13 +5,21 @@ defmodule PetrovichTest.ApplierTest do
 
   setup do
     # Just some fake modifications:
-    values = %{"mods" => [
-      "--1", # genitive
-      "-2",  # dative
-      "3",   # accusative
-      "44",  # instrumental
-      "."    # prepositional
-    ]}
+    values = %{
+      "mods" => [
+        # genitive
+        "--1",
+        # dative
+        "-2",
+        # accusative
+        "3",
+        # instrumental
+        "44",
+        # prepositional
+        "."
+      ]
+    }
+
     {:ok, rules: values}
   end
 

@@ -9,32 +9,28 @@ defmodule PetrovichTest.ParserTest.MiddleName.Normal do
         {:male, "Андреевич", "Андреевич"},
         {:female, "Викторовна", "Викторовна"}
       ],
-
       genitive: [
         {:male, "Андреевич", "Андреевича"},
         {:female, "Викторовна", "Викторовны"}
       ],
-
       dative: [
         {:male, "Андреевич", "Андреевичу"},
         {:female, "Викторовна", "Викторовне"}
       ],
-
       accusative: [
         {:male, "Андреевич", "Андреевича"},
         {:female, "Викторовна", "Викторовну"}
       ],
-
       instrumental: [
         {:male, "Андреевич", "Андреевичем"},
         {:female, "Викторовна", "Викторовной"}
       ],
-
       prepositional: [
         {:male, "Андреевич", "Андреевиче"},
         {:female, "Викторовна", "Викторовне"}
       ]
     }
+
     {:ok, values: values}
   end
 

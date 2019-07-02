@@ -13,7 +13,7 @@ defmodule Petrovich.Applier do
     dative: 1,
     accusative: 2,
     instrumental: 3,
-    prepositional: 4,
+    prepositional: 4
   }
 
   @doc """
@@ -22,13 +22,14 @@ defmodule Petrovich.Applier do
 
   These rules should be in format: `%{"mods" => list(5)}`.
   """
-  @spec apply(String.t, atom(), map()) :: {atom(), String.t}
+  @spec apply(String.t(), atom(), map()) :: {atom(), String.t()}
   def apply(data, case_, %{"mods" => mods}) do
     mod = Enum.at(mods, @rules[case_])
     apply_mod(mod, data)
   end
 
   defp apply_mod(".", data), do: data
+
   defp apply_mod(mod, data) do
     case count_replaces(mod) do
       0 -> data <> mod
@@ -46,8 +47,8 @@ defmodule Petrovich.Applier do
 
   defp count_replaces(mod) do
     mod
-    |> String.graphemes
-    |> Enum.reduce(%{}, fn(letter, acc) ->
+    |> String.graphemes()
+    |> Enum.reduce(%{}, fn letter, acc ->
       Map.update(acc, letter, 1, &(&1 + 1))
     end)
     |> Map.get("-", 0)

@@ -17,8 +17,12 @@ defmodule Petrovich.Store do
       @setting Keyword.get(options, :setting)
 
       def start_link do
-        Agent.start_link(fn ->
-          load_values() end, name: unquote(caller))
+        Agent.start_link(
+          fn ->
+            load_values()
+          end,
+          name: unquote(caller)
+        )
       end
 
       def stop do
@@ -26,13 +30,13 @@ defmodule Petrovich.Store do
       end
 
       def get(key) do
-        Agent.get(unquote(caller), fn(state) ->
+        Agent.get(unquote(caller), fn state ->
           Map.get(state, key)
         end)
       end
 
       def all do
-        Agent.get(unquote(caller), fn(state) ->
+        Agent.get(unquote(caller), fn state ->
           state
         end)
       end
@@ -40,8 +44,8 @@ defmodule Petrovich.Store do
       defp load_values do
         :petrovich_elixir
         |> Config.get_env(@setting)
-        |> File.read!
-        |> Poison.decode!
+        |> File.read!()
+        |> Poison.decode!()
       rescue
         e in File.Error ->
           raise RulesFileException, message: Exception.message(e)

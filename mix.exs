@@ -1,14 +1,14 @@
 defmodule Petrovich.Mixfile do
   use Mix.Project
 
-  @version "0.1.2"
+  @version "1.0.0"
   @url "https://github.com/petrovich/petrovich_elixir"
 
   def project do
     [
       app: :petrovich_elixir,
       version: @version,
-      elixir: "~> 1.4",
+      elixir: "~> 1.6",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
       deps: deps(),

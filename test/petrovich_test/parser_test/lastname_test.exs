@@ -9,32 +9,28 @@ defmodule PetrovichTest.ParserTest.LastName.Normal do
         {:male, "Соболев", "Соболев"},
         {:female, "Горева", "Горева"}
       ],
-
       genitive: [
         {:male, "Соболев", "Соболева"},
         {:female, "Горева", "Горевой"}
       ],
-
       dative: [
         {:male, "Соболев", "Соболеву"},
         {:female, "Горева", "Горевой"}
       ],
-
       accusative: [
         {:male, "Соболев", "Соболева"},
         {:female, "Горева", "Гореву"}
       ],
-
       instrumental: [
         {:male, "Соболев", "Соболевым"},
         {:female, "Горева", "Горевой"}
       ],
-
       prepositional: [
         {:male, "Соболев", "Соболеве"},
         {:female, "Горева", "Горевой"}
       ]
     }
+
     {:ok, values: values}
   end
 
@@ -75,8 +71,6 @@ defmodule PetrovichTest.ParserTest.LastName.Normal do
   end
 end
 
-
-
 defmodule PetrovichTest.ParserTest.LastName.Multipart do
   use ExUnit.Case
 
@@ -85,29 +79,25 @@ defmodule PetrovichTest.ParserTest.LastName.Multipart do
   setup do
     values = %{
       nomenative: [
-        {:male, "Соболев-Водкин", "Соболев-Водкин"},
+        {:male, "Соболев-Водкин", "Соболев-Водкин"}
       ],
-
       genitive: [
-        {:male, "Соболев-Водкин", "Соболева-Водкина"},
+        {:male, "Соболев-Водкин", "Соболева-Водкина"}
       ],
-
       dative: [
-        {:male, "Соболев-Водкин", "Соболеву-Водкину"},
+        {:male, "Соболев-Водкин", "Соболеву-Водкину"}
       ],
-
       accusative: [
-        {:male, "Соболев-Водкин", "Соболева-Водкина"},
+        {:male, "Соболев-Водкин", "Соболева-Водкина"}
       ],
-
       instrumental: [
-        {:male, "Соболев-Водкин", "Соболевым-Водкиным"},
+        {:male, "Соболев-Водкин", "Соболевым-Водкиным"}
       ],
-
       prepositional: [
-        {:male, "Соболев-Водкин", "Соболеве-Водкине"},
+        {:male, "Соболев-Водкин", "Соболеве-Водкине"}
       ]
     }
+
     {:ok, values: values}
   end
 

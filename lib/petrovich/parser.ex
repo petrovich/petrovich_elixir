@@ -26,9 +26,10 @@ defmodule Petrovich.Parser do
       {:ok, "Пироговым"}
 
   """
-  @spec parse(String.t, atom(),
-    atom(), atom() | nil) :: {:ok, String.t} | :error
+  @spec parse(String.t(), atom(), atom(), atom() | nil) ::
+          {:ok, String.t()} | :error
   def parse(data, _, :nomenative, _), do: {:ok, data}
+
   def parse(data, type, case_, gender) do
     gender = maybe_detect_gender(gender, data, type)
     apply_rule(data, to_string(type), case_, to_string(gender))
@@ -46,7 +47,7 @@ defmodule Petrovich.Parser do
       "Пироговым"
 
   """
-  @spec parse!(String.t, atom(), atom(), atom() | nil) :: String.t
+  @spec parse!(String.t(), atom(), atom(), atom() | nil) :: String.t()
   def parse!(data, type, case_, gender) do
     case parse(data, type, case_, gender) do
       {:ok, value} -> value
@@ -56,8 +57,8 @@ defmodule Petrovich.Parser do
 
   defp maybe_detect_gender(gender, data, type) do
     with nil <- gender,
-      {:ok, parsed_gender} <- Detector.detect_gender(data, type) do
-        parsed_gender
+         {:ok, parsed_gender} <- Detector.detect_gender(data, type) do
+      parsed_gender
     else
       :error -> :androgynous
       _ -> gender
@@ -65,12 +66,11 @@ defmodule Petrovich.Parser do
   end
 
   defp apply_rule(values, type, case_, gender) do
-    %{"exceptions" => exceptions,
-      "suffixes" => suffixes} = NameStore.get(type)
+    %{"exceptions" => exceptions, "suffixes" => suffixes} = NameStore.get(type)
 
     values
     |> String.split("-")
-    |> Enum.map(fn(item) ->
+    |> Enum.map(fn item ->
       prepare_value(item, case_, gender, exceptions, suffixes)
     end)
     |> ResultJoiner.join_all_results(&join_callback/1)
@@ -78,44 +78,47 @@ defmodule Petrovich.Parser do
 
   defp prepare_value(value, case_, gender, exceptions, suffixes) do
     value
-    |> String.downcase
+    |> String.downcase()
     |> maybe_exception(gender, exceptions)
     |> maybe_rule(gender, suffixes)
     |> case do
       {:error, _} -> :error
-      {:ok, res}  -> {:ok, Applier.apply(value, case_, res)}
+      {:ok, res} -> {:ok, Applier.apply(value, case_, res)}
     end
   end
 
   defp join_callback(results) do
     results
-    |> Enum.map(fn({_, item}) -> item end)
+    |> Enum.map(fn {_, item} -> item end)
     |> Enum.join("-")
   end
 
   defp maybe_exception(name, gender, exceptions) do
     exceptions
-    |> Enum.filter(fn(item) -> fits?(:e, name, gender, item) end)
+    |> Enum.filter(fn item -> fits?(:e, name, gender, item) end)
     |> pick_one(name)
   end
 
   defp maybe_rule({:ok, rule}, _, _), do: {:ok, rule}
+
   defp maybe_rule({:error, name}, gender, suffixes) do
     suffixes
-    |> Enum.filter(fn(item) -> fits?(:r, name, gender, item) end)
+    |> Enum.filter(fn item -> fits?(:r, name, gender, item) end)
     |> pick_one(name)
   end
 
   defp fits?(:e, name, gender, rule) do
     gender?(gender, rule) and name in rule["test"]
   end
+
   defp fits?(:r, name, gender, rule) do
     name_len = String.length(name)
 
-    gender?(gender, rule) and Enum.any?(rule["test"], fn(test) ->
-      test_len = String.length(test)
-      test == String.slice(name, name_len - test_len, test_len)
-    end)
+    gender?(gender, rule) and
+      Enum.any?(rule["test"], fn test ->
+        test_len = String.length(test)
+        test == String.slice(name, name_len - test_len, test_len)
+      end)
   end
 
   defp gender?(gender, rule) do
@@ -126,7 +129,7 @@ defmodule Petrovich.Parser do
     items
     |> Enum.at(0)
     |> case do
-      nil  -> {:error, name}
+      nil -> {:error, name}
       rule -> {:ok, rule}
     end
   end

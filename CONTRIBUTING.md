@@ -12,6 +12,7 @@
 
 Please, make sure that all these commands succeed before pushing anything:
 
+0. `mix format`
 1. `mix test`
 2. `mix credo --strict`
 3. `mix dialyzer` (it may take long on the first run)

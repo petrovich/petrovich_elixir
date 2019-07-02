@@ -3,7 +3,8 @@ defmodule PetrovichTest.ParserTest.FirstName.Normal do
 
   alias Petrovich.Parser
 
-  doctest Parser  # only in this module
+  # only in this module
+  doctest Parser
 
   setup do
     values = %{
@@ -11,32 +12,28 @@ defmodule PetrovichTest.ParserTest.FirstName.Normal do
         {:male, "Никита", "Никита"},
         {:female, "Кира", "Кира"}
       ],
-
       genitive: [
         {:male, "Никита", "Никиты"},
         {:female, "Кира", "Киры"}
       ],
-
       dative: [
         {:male, "Никита", "Никите"},
         {:female, "Кира", "Кире"}
       ],
-
       accusative: [
         {:male, "Никита", "Никиту"},
         {:female, "Кира", "Киру"}
       ],
-
       instrumental: [
         {:male, "Никита", "Никитой"},
         {:female, "Кира", "Кирой"}
       ],
-
       prepositional: [
         {:male, "Никита", "Никите"},
         {:female, "Кира", "Кире"}
       ]
     }
+
     {:ok, values: values}
   end
 
@@ -77,7 +74,6 @@ defmodule PetrovichTest.ParserTest.FirstName.Normal do
   end
 end
 
-
 defmodule Petrovich.ParserTest.FirstName.Exception do
   use ExUnit.Case
 
@@ -89,32 +85,28 @@ defmodule Petrovich.ParserTest.FirstName.Exception do
         {:male, "Яша", "Яша"},
         {:female, "Жизель", "Жизель"}
       ],
-
       genitive: [
         {:male, "Яша", "Яши"},
         {:female, "Жизель", "Жизели"}
       ],
-
       dative: [
         {:male, "Яша", "Яше"},
         {:female, "Жизель", "Жизели"}
       ],
-
       accusative: [
         {:male, "Яша", "Яшу"},
         {:female, "Жизель", "Жизель"}
       ],
-
       instrumental: [
         {:male, "Яша", "Яшей"},
         {:female, "Жизель", "Жизелью"}
       ],
-
       prepositional: [
         {:male, "Яша", "Яше"},
         {:female, "Жизель", "Жизели"}
       ]
     }
+
     {:ok, values: values}
   end
 

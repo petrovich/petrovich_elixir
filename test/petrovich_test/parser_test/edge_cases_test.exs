@@ -5,7 +5,10 @@ defmodule PetrovichTest.ParserTest.Edge do
 
   test "should fail on wrong names with '-'" do
     assert Parser.parse(
-      "Никита-123", :firstname, :prepositional, :male
-    ) == :error
+             "Никита-123",
+             :firstname,
+             :prepositional,
+             :male
+           ) == :error
   end
 end

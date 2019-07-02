@@ -22,8 +22,9 @@ defmodule PetrovichTest.DetectorTest do
 
   test "detects complex names" do
     assert Detector.detect_gender(
-      "Соколов-Саенко", :lastname
-    ) == {:ok, "male"}
+             "Соколов-Саенко",
+             :lastname
+           ) == {:ok, "male"}
   end
 
   test "fails to detect gender" do

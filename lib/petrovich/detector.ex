@@ -33,15 +33,15 @@ defmodule Petrovich.Detector do
       :error
 
   """
-  @spec detect_gender(String.t, atom()) :: {:ok, String.t} | :error
+  @spec detect_gender(String.t(), atom()) :: {:ok, String.t()} | :error
   def detect_gender(name, type) do
-    %{"exceptions" => exceptions,
-      "suffixes" => suffixes} = GenderStore.get("gender", to_string(type))
+    %{"exceptions" => exceptions, "suffixes" => suffixes} =
+      GenderStore.get("gender", to_string(type))
 
     name
-    |> String.downcase
+    |> String.downcase()
     |> String.split("-")
-    |> Enum.map(fn(item) -> prepare_value(item, exceptions, suffixes) end)
+    |> Enum.map(fn item -> prepare_value(item, exceptions, suffixes) end)
     |> ResultJoiner.join_any_results(&join_result/1)
   end
 
@@ -53,7 +53,7 @@ defmodule Petrovich.Detector do
 
   defp join_result(result) do
     result
-    |> Enum.find(fn (item) ->
+    |> Enum.find(fn item ->
       case item do
         {:ok, _} -> true
         _ -> false
@@ -64,7 +64,7 @@ defmodule Petrovich.Detector do
 
   defp maybe_exception(name, exceptions) do
     exceptions
-    |> Enum.find(fn({_, names}) -> name in names end)
+    |> Enum.find(fn {_, names} -> name in names end)
     |> case do
       {gender, _} -> {:ok, gender}
       nil -> {:error, name}
@@ -72,9 +72,10 @@ defmodule Petrovich.Detector do
   end
 
   defp maybe_rule({:ok, gender}, _), do: {:ok, gender}
+
   defp maybe_rule({:error, name}, suffixes) do
     suffixes
-    |> Enum.find(fn({_, rule}) -> fits?(name, rule) end)
+    |> Enum.find(fn {_, rule} -> fits?(name, rule) end)
     |> case do
       {gender, _} -> {:ok, gender}
       nil -> :error
@@ -84,10 +85,9 @@ defmodule Petrovich.Detector do
   defp fits?(name, rule) do
     name_len = String.length(name)
 
-    Enum.any?(rule, fn(test) ->
+    Enum.any?(rule, fn test ->
       test_len = String.length(test)
       test == String.slice(name, name_len - test_len, test_len)
     end)
   end
-
 end
