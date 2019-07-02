@@ -55,8 +55,12 @@ You will need to add these lines into your `config.exs`:
 ```elixir
 config :petrovich_elixir,
   rules_path: "rules/rules.json",
-  gender_path: "rules/gender.json"
+  gender_path: "rules/gender.json",
+  json_codec: Jason
 ```
+
+You can swap our default ([`Jason`](https://github.com/michalmuskala/jason))
+codec to any of your choice.
 
 
 ## Rules

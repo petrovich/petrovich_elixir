@@ -40,9 +40,6 @@ defmodule Petrovich.Mixfile do
     [
       {:jason, "~> 1.1"},
 
-      # We used to have it as a primary json lib, now only use for tests:
-      {:poison, "~> 4.0", only: [:dev, :test]},
-
       # Dev and test dependencies:
       {:credo, "~> 1.1", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.11", only: :test, runtime: false},
