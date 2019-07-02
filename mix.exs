@@ -41,7 +41,7 @@ defmodule Petrovich.Mixfile do
       {:poison, "~> 3.1"},
 
       # Dev and test dependencies:
-      {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.1", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.7", only: :test, runtime: false},
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
       {:ex_doc, ">= 0.0.0", only: :dev}
