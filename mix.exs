@@ -38,7 +38,7 @@ defmodule Petrovich.Mixfile do
 
   defp deps do
     [
-      {:poison, "~> 3.1"},
+      {:poison, "~> 4.0"},
 
       # Dev and test dependencies:
       {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
