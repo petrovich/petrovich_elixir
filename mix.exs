@@ -44,7 +44,7 @@ defmodule Petrovich.Mixfile do
       {:credo, "~> 1.1", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.11", only: :test, runtime: false},
       {:dialyxir, "~> 0.5", only: :dev, runtime: false},
-      {:ex_doc, ">= 0.0.0", only: :dev}
+      {:ex_doc, "~> 0.20", only: :dev}
     ]
   end
 
