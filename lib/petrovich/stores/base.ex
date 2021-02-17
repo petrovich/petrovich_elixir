@@ -40,8 +40,9 @@ defmodule Petrovich.Store do
         |> get_json_codec().decode!()
       rescue
         e in File.Error ->
-          reraise RulesFileException, System.stacktrace(),
-            message: Exception.message(e)
+          reraise RulesFileException,
+                  [message: Exception.message(e)],
+                  __STACKTRACE__
       end
 
       defp get_json_codec do
