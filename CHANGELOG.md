@@ -1,10 +1,18 @@
 # Changelog
 
+
+## Version 2.0.0
+
+### Breaking changes
+
+- Now we only support `elixir>=1.7`
+
+
 ## Version 1.0.0
 
 ### Breaking changes
 
-- Now only support `elixir>=1.6`
+- Now we only support `elixir>=1.6`
 - We now use `Jason` as the default `json` library
 
 ### Features

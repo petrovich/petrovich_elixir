@@ -27,6 +27,13 @@ defmodule Petrovich.Mixfile do
         "coveralls.detail": :test,
         "coveralls.post": :test,
         "coveralls.html": :test
+      ],
+
+      # Dialyzer:
+      dialyzer: [
+        plt_add_deps: :apps_direct,
+        plt_core_path: "priv/plts",
+        plt_file: {:no_warn, "priv/plts/dialyzer.plt"}
       ]
     ]
   end
@@ -41,9 +48,9 @@ defmodule Petrovich.Mixfile do
       {:jason, "~> 1.1"},
 
       # Dev and test dependencies:
-      {:credo, "~> 1.1", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.11", only: :test, runtime: false},
-      {:dialyxir, "~> 1.0", only: :dev, runtime: false},
+      {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.20", only: :dev}
     ]
   end

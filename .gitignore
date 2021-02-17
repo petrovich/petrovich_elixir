@@ -10,3 +10,4 @@ erl_crash.dump
 #### custom ####
 /doc
 *.tar
+priv/plts
