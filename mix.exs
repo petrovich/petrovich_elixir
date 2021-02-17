@@ -49,7 +49,7 @@ defmodule Petrovich.Mixfile do
 
       # Dev and test dependencies:
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
-      {:excoveralls, "~> 0.11", only: :test, runtime: false},
+      {:excoveralls, "~> 0.13", only: :test, runtime: false},
       {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.20", only: :dev}
     ]
