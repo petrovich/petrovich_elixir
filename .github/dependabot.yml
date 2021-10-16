@@ -1,0 +1,26 @@
+version: 2
+updates:
+- package-ecosystem: mix
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "22:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: ex_doc
+    versions:
+    - 0.24.0
+    - 0.24.1
+  - dependency-name: credo
+    versions:
+    - 1.5.4
+    - 1.5.5
+  - dependency-name: excoveralls
+    versions:
+    - 0.13.4
+- package-ecosystem: gitsubmodule
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "22:00"
+  open-pull-requests-limit: 10
